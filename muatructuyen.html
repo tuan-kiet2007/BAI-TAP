@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -54,3 +55,61 @@ renderProducts();
 
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mua trực tuyến - Giống Cây Hữu Cơ</title>
+<style></style>
+<link rel="stylesheet" href="./mele.css">
+</head>
+<body>
+
+<header>
+  <a href="index.html"><h1>🌿 Cửa Hàng Giống Cây Hữu Cơ</h1></a>
+</header>
+
+<h2>Sản phẩm</h2>
+<div class="grid" id="productGrid"></div>
+
+<script>
+const products=[
+  {id:1,title:'Cải Kale Hữu Cơ',price:50000,img:'./caikalehuuco.jpg'},
+  {id:2,title:'Dâu Tây Ngọt',price:120000,img:'./dautayngot.jpg'}
+];
+
+let cart=[];
+
+function formatVND(n){return new Intl.NumberFormat('vi-VN').format(n)+'₫';}
+
+function renderProducts(){
+  const grid=document.getElementById('productGrid');
+  grid.innerHTML='';
+  products.forEach(p=>{
+    const div=document.createElement('div'); div.className='card';
+    div.innerHTML=`
+      <img src="${p.img}" alt="${p.title}">
+      <h3>${p.title}</h3>
+      <div class="price">${formatVND(p.price)}</div>
+      <a href="thanhtoan.html">  <button class="btn" onclick="addToCart(${p.id})">Thêm vào giỏ</button></a>
+    `;
+    grid.appendChild(div);
+  });
+}
+
+function addToCart(id){
+  const exist=cart.find(c=>c.id===id);
+  if(exist) exist.qty++;
+  else cart.push({id,qty:1});
+  localStorage.setItem('cart',JSON.stringify(cart));
+  window.location.href='checkout.html';
+}
+
+renderProducts();
+</script>
+
+</body>
+</html>
+>>>>>>> 45a438f9558738914db173b6f70c0af37eb7749e
